@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import p1 from "../public/images/p1.avif";
 import p2 from "../public/images/p2.avif";
@@ -8,8 +8,10 @@ import LocationIcon from "./components/LocationIcon";
 import CloseIcon from "./components/CloseIcon";
 import { useState } from "react";
 import ClientList from "./components/ClientList";
+import AddUserButton from "./components/AddUserButton";
+import InputUser from "./components/InputUser";
+import useStore from "./store/zustand";
 
-// const usersJson = [
 //     {
 //         id: 1,
 //         name: "Leslie Abbott",
@@ -41,11 +43,27 @@ import ClientList from "./components/ClientList";
 // ];
 
 export default function Home() {
+    const addUserState = useStore((store) => store.addUserState);
+    const updateAddUserState = useStore((store) => store.updateAddUserState);
+    const addUser = useStore((store) => store.addUser);
 
+    const handleWholeClick = (e) => {
+      
+      if(addUserState) updateAddUserState(false)
+      console.log("HTML clicked");
+    };
 
     return (
-        <main className="min-h-screen  p-24  ">
-            <ClientList />
+        <main onClick={handleWholeClick} className="min-h-screen  p-24  ">
+            <ClientList addUserState={addUserState}/>
+            {addUserState ? (
+                <InputUser
+                    addUser={addUser}
+                    updateAddUserState={updateAddUserState}
+                />
+            ) : (
+                <AddUserButton onClick={() => updateAddUserState(true)} />
+            )}
         </main>
     );
 }

@@ -1,14 +1,15 @@
-import useUserStore from "../store/zustand";
+import useStore from "../store/zustand";
 import ClientCard from "./ClientCard";
 
-export default () => {
+export default ({ addUserState }) => {
 
-    const users = useUserStore((state) => state.users);
+    const users = useStore((state) => state.users);
+    console.log(users)
 
     return (
-        <ul role="list" className="flex flex-col gap-4 ">
+        <ul role="list" className={`${addUserState ? "pointer-events-none" : ""} flex flex-col gap-4 `}>
             {users.map((person) => (
-                <ClientCard person={person} />
+                <ClientCard person={person} key={person.id}/>
             ))}
         </ul>
     );
