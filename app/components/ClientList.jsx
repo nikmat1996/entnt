@@ -7,7 +7,7 @@ export default ({ addUserState }) => {
     console.log(users)
 
     return (
-        <ul role="list" className={`${addUserState ? "pointer-events-none" : ""} flex flex-col gap-4 `}>
+        <ul role="list" className={`${addUserState ? "pointer-events-none opacity-30" : ""} flex flex-col gap-4 `}>
             {users.map((person) => (
                 <ClientCard person={person} key={person.id}/>
             ))}
