@@ -39,15 +39,28 @@ const useStore = create((set) => ({
             location: "Lexington Avenue",
         },
     ],
-    addUser: (newUser) =>
-        set((store) => ({ users: [...store.users, newUser] })),
+    addUser: (newVal) => set((store) => ({ users: [...store.users, newVal] })),
     deleteUser: (id) =>
         set((store) => ({
             users: store.users.filter((person) => person.id !== id),
         })),
-    updateUser: () => set((store) => ({ bears: store.bears + 1 })),
-    addUserState: false,
-    updateAddUserState: (val) => set((store) => ({ addUserState: val })),
+    updateUser: (updatedVal) =>
+        set((store) => ({
+            users: store.users.map((user) =>
+                user.id === updatedVal.id ? updatedVal : user
+            ),
+        })),
+    addUser_state: false,
+    change_addUser_state: (val) => set((store) => ({ addUser_state: val })),
+    deleteUser_state: false,
+    change_deleteUser_state: (val) =>
+        set((store) => ({ deleteUser_state: val })),
+    editUser_state: false,
+    change_editUser_state: (val) => set((store) => ({ editUser_state: val })),
+    editUser_id: null,
+    add_editUser_id: (val) => set((store) => ({ editUser_id: val })),
+    deleteUser_id: null,
+    add_deleteUser_id: (val) => set((store) => ({ deleteUser_id: val })),
 }));
 
 export default useStore;

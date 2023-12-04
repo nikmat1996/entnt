@@ -1,8 +1,18 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import Button from "./Button";
 
-export default ({addUser, updateAddUserState}) => {
-    const [user, setUser] = useState({});
+export default (props) => {
+    const { 
+        addUser, 
+        change_addUser_state, 
+        person = {}, 
+        editUser_state = false, 
+        updateUser, 
+        change_editUser_state
+     } = props;
+
+    const [user, setUser] = useState(person);
 
     const handleChange = (e) => {
         setUser((currVal) => ({
@@ -12,9 +22,15 @@ export default ({addUser, updateAddUserState}) => {
     };
 
     const handleSubmit = (e) => {
-        
         e.preventDefault()
-        updateAddUserState(false)
+
+        if(editUser_state){
+            change_editUser_state(false)
+            updateUser(user)
+            return
+        }
+
+        change_addUser_state(false)
         addUser({
             firstName: "Random",
             lastName: "Name",
@@ -24,12 +40,20 @@ export default ({addUser, updateAddUserState}) => {
         })
     }
 
+    const handleCancel = () => {
+        if(editUser_state){
+            change_editUser_state(false)
+            return
+        }
+        change_addUser_state(false)
+    }
+
     const handleFormClick = (e) => {
         e.stopPropagation()
     }
 
     return (
-        <form className="px-5 py-2 flex items-center justify-around mt-4 bg-gray-800 rounded-3xl h-[104px] border border-blue-400"  onClick={handleFormClick} onSubmit={handleSubmit}>
+        <form className="px-5 py-2 flex items-center justify-around bg-gray-800 rounded-3xl h-[104px] border border-blue-400"  onClick={handleFormClick} onSubmit={handleSubmit}>
             <InputWrapper
                 id={"firstName"}
                 title={"First Name"}
@@ -51,8 +75,8 @@ export default ({addUser, updateAddUserState}) => {
                 placeholder={"Location"}
                 onChange={handleChange}
             />
-            <button type="submit" className="p-1 px-5 border border-1 rounded-2xl border-sky-600 text-blue-500 hover:bg-blue-600 hover:text-blue-950 focus:outline-none focus:bg-blue-600 focus:text-blue-950" >Add</button>
-            <button onClick={()=>updateAddUserState(false)} className="p-1 px-5 border border-1 rounded-2xl border-sky-600 text-blue-500 hover:bg-blue-600 hover:text-blue-950 focus:outline-none focus:bg-blue-600 focus:text-blue-950" >Cancel</button>
+            <Button type="submit" >{editUser_state ? "Update" : "Add"}</Button>
+            <Button onClick={handleCancel}>Cancel</Button>
         </form>
     );
 };
@@ -68,7 +92,7 @@ const InputWrapper = ({ id, title, placeholder, value, onChange }) => (
             onChange={onChange}
             autoComplete="off"
             required
-            className="focus:outline-none peer px-3 py-1 bg-slate-600 focus:bg-blue-600 rounded-xl placeholder-transparent"
+            className="focus:outline-none peer px-3 py-1 bg-slate-600 focus:bg-blue-600 rounded-xl placeholder-transparent focus:text-black text-sky-300 selection:text-black selection:bg-gray-400"
         />
         <label for={id} className="absolute left-4 -top-5 peer-focus:-top-5 peer-focus:left-4 text-xs text-blue-400 peer-focus:text-xs peer-focus:text-blue-400 peer-placeholder-shown:left-6 peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-950 transition-all">{title}</label>
     </div>
