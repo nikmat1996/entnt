@@ -36,32 +36,42 @@ import useStore from "./store/zustand";
 // ];
 
 export default function Home() {
-    const addUser_state = useStore((store) => store.addUser_state);
-    const editUser_state = useStore((store) => store.editUser_state);
-    const deleteUser_state = useStore((store) => store.deleteUser_state);
-    const change_addUser_state = useStore((store) => store.change_addUser_state);
-    const change_editUser_state = useStore((store) => store.change_editUser_state);
-    const change_deleteUser_state = useStore((store) => store.change_deleteUser_state);
-    const addUser = useStore((store) => store.addUser);
+  const addUser_state = useStore((store) => store.addUser_state);
+  const editUser_state = useStore((store) => store.editUser_state);
+  const deleteUser_state = useStore((store) => store.deleteUser_state);
+  const change_addUser_state = useStore((store) => store.change_addUser_state);
+  const change_editUser_state = useStore(
+    (store) => store.change_editUser_state,
+  );
+  const change_deleteUser_state = useStore(
+    (store) => store.change_deleteUser_state,
+  );
+  const addUser = useStore((store) => store.addUser);
 
-    const handleWholeClick = (e) => {
-      
-      if(addUser_state) change_addUser_state(false)
-      if(editUser_state) change_editUser_state(false)
-      console.log("MAIN clicked");
-      // console.log("editUser_state =",editUser_state);
-      // console.log("addUser_state =",addUser_state);
-    };
+  const handleWholeClick = (e) => {
+    if (addUser_state) change_addUser_state(false);
+    if (editUser_state) change_editUser_state(false);
+    console.log("MAIN clicked");
+    // console.log("editUser_state =",editUser_state);
+    // console.log("addUser_state =",addUser_state);
+  };
 
-    return (
-        <main onClick={handleWholeClick} className="min-h-screen  p-24">
-            <ClientList />
-            {addUser_state ? (
-                <InputUser addUser={addUser} change_addUser_state={change_addUser_state} />
-            ) : (
-                <AddUserButton onClick={() => change_addUser_state(true)} editUser_state={editUser_state} deleteUser_state={deleteUser_state}/>
-            )}
-            <Calender />
-        </main>
-    );
+  return (
+    <main onClick={handleWholeClick} className="min-h-screen p-24">
+      <ClientList />
+      {addUser_state ? (
+        <InputUser
+          addUser={addUser}
+          change_addUser_state={change_addUser_state}
+        />
+      ) : (
+        <AddUserButton
+          onClick={() => change_addUser_state(true)}
+          editUser_state={editUser_state}
+          deleteUser_state={deleteUser_state}
+        />
+      )}
+      <Calender />
+    </main>
+  );
 }
