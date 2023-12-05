@@ -1,14 +1,7 @@
 "use client";
-import Image from "next/image";
-import p1 from "../public/images/p1.avif";
-import p2 from "../public/images/p2.avif";
-import p3 from "../public/images/p3.avif";
-import p4 from "../public/images/p4.avif";
-import LocationIcon from "./components/LocationIcon";
-import CloseIcon from "./components/CloseIcon";
-import { useState } from "react";
-import ClientList from "./components/ClientList";
 import AddUserButton from "./components/AddUserButton";
+import Calender from "./components/Calender";
+import ClientList from "./components/ClientList";
 import InputUser from "./components/InputUser";
 import useStore from "./store/zustand";
 
@@ -55,19 +48,20 @@ export default function Home() {
       
       if(addUser_state) change_addUser_state(false)
       if(editUser_state) change_editUser_state(false)
-      console.log("HTML clicked");
+      console.log("MAIN clicked");
       // console.log("editUser_state =",editUser_state);
       // console.log("addUser_state =",addUser_state);
     };
 
     return (
-        <main onClick={handleWholeClick} className="min-h-screen  p-24  ">
+        <main onClick={handleWholeClick} className="min-h-screen  p-24">
             <ClientList />
             {addUser_state ? (
                 <InputUser addUser={addUser} change_addUser_state={change_addUser_state} />
             ) : (
                 <AddUserButton onClick={() => change_addUser_state(true)} editUser_state={editUser_state} deleteUser_state={deleteUser_state}/>
             )}
+            <Calender />
         </main>
     );
 }
