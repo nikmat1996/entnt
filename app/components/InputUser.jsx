@@ -53,7 +53,7 @@ export default (props) => {
     }
 
     return (
-        <form className="px-5 py-2 flex items-center justify-around bg-gray-800 rounded-3xl h-[104px] border border-blue-400"  onClick={handleFormClick} onSubmit={handleSubmit}>
+        <form className="px-5 py-2 flex items-center justify-around bg-gray-800 rounded-3xl h-[104px] border border-blue-400 w-full max-w-7xl mx-auto"  onClick={handleFormClick} onSubmit={handleSubmit}>
             <InputWrapper
                 id={"firstName"}
                 title={"First Name"}

@@ -1,9 +1,10 @@
 import Button from "./Button";
 
-export default ({person, deleteUser, change_deleteUser_state}) => {
+export default ({person, deleteUser, change_deleteUser_state, deleteAllmeetingOfPerson}) => {
     const handleDelete = () => {
         change_deleteUser_state(false)
         deleteUser(person.id)
+        deleteAllmeetingOfPerson(person.id)
     }
 
     const handleCancel = () => {

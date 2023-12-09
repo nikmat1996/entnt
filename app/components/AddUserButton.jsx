@@ -1,7 +1,40 @@
+import InputUser from "./InputUser";
+import meetingStore from "../store/meetingStore";   
 import PlusIcon from "./PlusIcon";
 
-export default ({ onClick, editUser_state, deleteUser_state }) => (
-    <button onClick={onClick} className={`${editUser_state || deleteUser_state ? "pointer-events-none opacity-30": ""} w-full h-[104px] bg-gray-800  rounded-3xl my-4 group box-border flex items-center justify-center text-gray-500 hover:text-gray-400 hover:outline hover:outline-blue-400 hover:outline-1 focus:outline-none focus-visible:outline-1 focus-visible:outline-blue-400 focus-visible:text-gray-400 active:bg-blue-950`}>
-        Add New User <span className="ml-5 group-hover:scale-125  transition-transform "><PlusIcon /></span>
+export default (props) => {
+  const {
+    onClick = () => {},
+    editUser_state = false,
+    deleteUser_state = false,
+    addUser_state = false,
+    change_addUser_state,
+    addUser,
+  } = props;
+  const addmeeting_state = meetingStore((store) => store.addmeeting_state);
+
+
+  if (addUser_state)
+    return (
+      <InputUser
+        addUser={addUser}
+        change_addUser_state={change_addUser_state}
+      />
+    );
+
+  return (
+    <button
+      onClick={() => change_addUser_state(true)}
+      className={`${
+        editUser_state || deleteUser_state || addmeeting_state
+          ? "pointer-events-none opacity-30"
+          : ""
+      } group my-4 box-border  flex h-[104px] w-full items-center justify-center rounded-3xl bg-gray-800 text-gray-500 hover:text-gray-400 hover:outline hover:outline-1 hover:outline-blue-400 focus:outline-none focus-visible:text-gray-400 focus-visible:outline-1 focus-visible:outline-blue-400 active:bg-blue-950 max-w-7xl mx-auto`}
+    >
+      Add New User
+      <span className="ml-5 transition-transform  group-hover:scale-125 ">
+        <PlusIcon />
+      </span>
     </button>
-)
+  );
+};

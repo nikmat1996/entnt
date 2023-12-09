@@ -4,7 +4,7 @@ import p2 from "../../public/images/p2.avif";
 import p3 from "../../public/images/p3.avif";
 import p4 from "../../public/images/p4.avif";
 
-const useStore = create((set) => ({
+const userStore = create((set) => ({
     users: [
         {
             id: 1,
@@ -63,4 +63,4 @@ const useStore = create((set) => ({
     add_deleteUser_id: (val) => set((store) => ({ deleteUser_id: val })),
 }));
 
-export default useStore;
+export default userStore;

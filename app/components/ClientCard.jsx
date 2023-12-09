@@ -1,8 +1,10 @@
 import CloseIcon from "./CloseIcon";
 import Image from "next/image";
 import LocationIcon from "./LocationIcon";
-import useStore from "../store/zustand";
+import userStore from "../store/userStore";
+import meetingStore from "../store/meetingStore";
 import EditIcon from "./EditIcon";
+import MeetingList from "./MeetingList";
 
 export default (props) => {
 
@@ -13,10 +15,12 @@ export default (props) => {
         deleteUser_state, 
         change_editUser_state, 
         change_deleteUser_state, 
-        add_deleteUser_id } = props;
-    // const deleteUser = useStore((state) => state.deleteUser);
-    // const change_editUser_state = useStore((state) => state.change_editUser_state);
-    // const add_editUser_id = useStore((state) => state.add_editUser_id);
+        add_deleteUser_id,
+        meetings
+     } = props;
+    // const deleteUser = userStore((state) => state.deleteUser);
+    // const change_editUser_state = userStore((state) => state.change_editUser_state);
+    // const add_editUser_id = userStore((state) => state.add_editUser_id);
 
     const handleEditUser = () => {
         change_editUser_state(true)
@@ -29,7 +33,7 @@ export default (props) => {
 
     return (
         <li className={`${editUser_state || deleteUser_state ? "pointer-events-none opacity-30" : ""} flex relative justify-between gap-x-6 px-5 py-2 bg-slate-800 rounded-2xl group/li hover:bg-blue-950 transition-all hover:shadow-lg selection:text-sky-900 selection:bg-blue-400`}>
-            <section className="flex min-w-0 py-4 gap-x-4 group/s1 border-r border-blue-900 w-1/3 items-center">
+            <section className="flex min-w-0 py-4 gap-x-4 group/s1 border-r border-blue-900 w-full max-w-sm items-center">
                 <span
                     onClick={handleDeleteUser}
                     className="absolute peer top-0 right-0 invisible cursor-pointer opacity-0 rounded-full bg-blue-800 transition-all hover:bg-blue-500 group-hover/li:opacity-100 group-hover/li:visible group-hover/li:translate-x-2 group-hover/li:-translate-y-3"
@@ -58,14 +62,8 @@ export default (props) => {
                     <span className="-translate-x-1 group-hover/edit:translate-x-0 transition-transform duration-300"><EditIcon /></span>
                 </button>
             </section>
-            <section className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                <p className="text-sm leading-6 text-gray-900">
-                    Co-Founder / CEO
-                </p>
-                <p className="mt-1 text-xs leading-5 text-gray-500">
-                    Last seen <time dateTime="2023-01-23T13:23Z">3h ago</time>
-                </p>
-            </section>
+            
+            <MeetingList userId={person.id} meetings={meetings}/>
         </li>
     );
 };

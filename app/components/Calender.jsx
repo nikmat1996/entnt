@@ -11,6 +11,7 @@ import {
   parse,
   parseISO,
   startOfToday,
+  compareAsc
 } from "date-fns";
 import { Fragment, useState } from "react";
 import LeftIcon from "./Icons/LeftIcon";
@@ -68,7 +69,8 @@ export default function Calender() {
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
-
+  
+  console.log("selected = ", selectedDay)
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
@@ -89,10 +91,9 @@ export default function Calender() {
   );
 
   return (
-    <div className="pt-16">
-      <div className="mx-auto max-w-md px-4 sm:px-7 md:max-w-4xl md:px-6">
-        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
-          <div className="md:pr-14">
+      <div className="mx-auto w-80 md:w-96 md:px-6 transition-all">
+        {/* <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200"> */}
+          <div className="">
             <div className="flex items-center">
               <h2 className="flex-auto font-semibold text-blue-600">
                 {format(firstDayCurrentMonth, "MMMM yyyy")}
@@ -148,6 +149,7 @@ export default function Calender() {
                       isEqual(day, selectedDay) && !isToday(day) && "bg-blue-600",
                       !isEqual(day, selectedDay) && "hover:outline",
                       (isEqual(day, selectedDay) || isToday(day)) && "font-semibold",
+                      (compareAsc(day, today) === -1) && "text-gray-600 pointer-events-none",
                       "mx-auto flex h-8 w-8 items-center justify-center rounded-full",
                     )}
                   >
@@ -184,9 +186,8 @@ export default function Calender() {
               )}
             </ol>
           </section> */}
-        </div>
+        {/* </div> //hello */}
       </div>
-    </div>
   );
 }
 

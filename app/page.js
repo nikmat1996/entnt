@@ -3,7 +3,8 @@ import AddUserButton from "./components/AddUserButton";
 import Calender from "./components/Calender";
 import ClientList from "./components/ClientList";
 import InputUser from "./components/InputUser";
-import useStore from "./store/zustand";
+import Modal from "./components/Modal";
+import userStore from "./store/userStore";
 
 //     {
 //         id: 1,
@@ -36,17 +37,17 @@ import useStore from "./store/zustand";
 // ];
 
 export default function Home() {
-  const addUser_state = useStore((store) => store.addUser_state);
-  const editUser_state = useStore((store) => store.editUser_state);
-  const deleteUser_state = useStore((store) => store.deleteUser_state);
-  const change_addUser_state = useStore((store) => store.change_addUser_state);
-  const change_editUser_state = useStore(
+  const addUser_state = userStore((store) => store.addUser_state);
+  const editUser_state = userStore((store) => store.editUser_state);
+  const deleteUser_state = userStore((store) => store.deleteUser_state);
+  const change_addUser_state = userStore((store) => store.change_addUser_state);
+  const change_editUser_state = userStore(
     (store) => store.change_editUser_state,
   );
-  const change_deleteUser_state = useStore(
+  const change_deleteUser_state = userStore(
     (store) => store.change_deleteUser_state,
   );
-  const addUser = useStore((store) => store.addUser);
+  const addUser = userStore((store) => store.addUser);
 
   const handleWholeClick = (e) => {
     if (addUser_state) change_addUser_state(false);
@@ -57,21 +58,17 @@ export default function Home() {
   };
 
   return (
-    <main onClick={handleWholeClick} className="min-h-screen p-24">
+    <main onClick={handleWholeClick} className="max-h-screen p-24 relative">
       <ClientList />
-      {addUser_state ? (
-        <InputUser
-          addUser={addUser}
-          change_addUser_state={change_addUser_state}
-        />
-      ) : (
-        <AddUserButton
-          onClick={() => change_addUser_state(true)}
-          editUser_state={editUser_state}
-          deleteUser_state={deleteUser_state}
-        />
-      )}
-      <Calender />
+
+      <AddUserButton
+        editUser_state={editUser_state}
+        deleteUser_state={deleteUser_state}
+        addUser_state={addUser_state}
+        change_addUser_state={change_addUser_state}
+        addUser={addUser}
+      />
+      <Modal />
     </main>
   );
 }
