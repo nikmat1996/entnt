@@ -5,26 +5,22 @@ const meetingStore = create((set) => ({
     {
       id: 1,
       userId: "2",
-      date: "22/12/2023",
-      time: "2:00 PM",
+      timeStamp: "1702636200",
     },
     {
       id: 2,
       userId: "2",
-      date: "23/12/2023",
-      time: "5:00 PM",
+      timeStamp: "1702355400",
     },
     {
       id: 3,
       userId: "1",
-      date: "25/12/2025",
-      time: "7:00 PM",
+      timeStamp: "1702643400",
     },
     {
       id: 4,
       userId: "3",
-      date: "31/12/2023",
-      time: "4:00 PM",
+      timeStamp: "1704022200",
     },
   ],
   addmeeting: (newVal) =>
@@ -47,14 +43,16 @@ const meetingStore = create((set) => ({
   change_addmeeting_state: (val) => set((store) => ({ addmeeting_state: val })),
   addmeeting_userId: null,
   add_addmeeting_userId: (val) => set((store) => ({ addmeeting_userId: val })),
-  deletemeeting_state: false,
-  change_deletemeeting_state: (val) =>
-    set((store) => ({ deletemeeting_state: val })),
+
   editmeeting_state: false,
   change_editmeeting_state: (val) =>
     set((store) => ({ editmeeting_state: val })),
   editmeeting_id: null,
   add_editmeeting_id: (val) => set((store) => ({ editmeeting_id: val })),
+
+  deletemeeting_state: false,
+  change_deletemeeting_state: (val) =>
+    set((store) => ({ deletemeeting_state: val })),
   deletemeeting_id: null,
   add_deletemeeting_id: (val) => set((store) => ({ deletemeeting_id: val })),
 }));

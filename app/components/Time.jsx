@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import {
   add,
@@ -16,17 +16,43 @@ import {
   getHours,
   addHours,
   startOfHour,
+  startOfDay,
+  compareAsc,
+  isSameHour,
 } from "date-fns";
 
-export default () => {
-  const currTime = Date.now();
-  const nextTime = addHours(currTime, 1)
+export default ({ day = Date.now(), setFinalSchedule = () => {} }) => {
+  const currTime = new Date();
+  const nextTime = addHours(currTime, 1);
   const nextHr = format(nextTime, "h");
   const currMeridiem = format(nextTime, "a");
 
-  const [selectedHr, setSelectedHr] = useState(Number(nextHr));
-  const [meridiem, setMeridiem] = useState(currMeridiem);
-  
+  const [selectedHr, setSelectedHr] = useState();
+  const [meridiem, setMeridiem] = useState(
+    currMeridiem === "PM" ? false : true,
+  );
+
+  const getNewDate = (hr) => {
+    const totalHours = hr + (meridiem ? 0 : 12);
+    const date = addHours(startOfDay(day), totalHours);
+    return date;
+  };
+
+  useEffect(() => {
+    if (!isToday(day)) {
+      setSelectedHr(false);
+      setFinalSchedule(false)
+      // if(selectedHr)
+      //   setFinalSchedule(getNewDate(selectedHr))
+    }
+  }, [day]);
+
+  // console.log(totalHours)
+  // console.log(format(day, "dd MM yyyy KK mm a"))
+  // console.log(format(startOfDay(day), "dd MM yyyy KK mm a"))
+  // console.log(format(date, "h"))
+
+  // console.log(format(date, "dd MM yyyy KK mm a"))
 
   const getClassname = (hr) => {
     let radius = 100;
@@ -36,25 +62,51 @@ export default () => {
 
     return `translate-x-[${x}px] -translate-y-[${y}px]`;
   };
-    return (
-      <div className="relative flex aspect-square h-96 items-center justify-center ">
-        {Array.from({ length: 12 }, (_, index) => index + 1).map((hr) => {
-          return (
-            <button
-            onClick={() => setSelectedHr(hr)}
-              className={twMerge(
-                "absolute aspect-square h-9 rounded-full text-sky-600 hover:outline",
-                getClassname(hr),
-                selectedHr == hr && "bg-blue-600 text-white outline-none"
-                
-              )}
-            >
-              {hr}
-            </button>
-          );
-        })}
-      </div>
-    );
+
+  const handleClick = (hr) => {
+    setSelectedHr(hr)
+    setFinalSchedule(getNewDate(hr))
+  }
+
+  const toggleMeridiem = () => {
+    setMeridiem((prev) => !prev);
+    setSelectedHr(false);
+    setFinalSchedule(false)
+  };
+  return (
+    <div className="relative flex aspect-square h-96 items-center justify-center ">
+      {Array.from({ length: 12 }, (_, index) => index + 1).map((hr) => {
+        return (
+          <button
+            onClick={() => handleClick(hr)}
+            className={twMerge(
+              "absolute aspect-square h-9 rounded-full text-sky-600 hover:outline",
+              getClassname(hr),
+              selectedHr == hr && "bg-blue-600 text-white outline-none",
+              isToday(day) &&
+                compareAsc(getNewDate(hr), Date.now()) === -1 &&
+                "pointer-events-none text-sky-800",
+              isToday(day) &&
+                isSameHour(getNewDate(hr), nextTime) &&
+                " text-red-500",
+              isToday(day) &&
+                isSameHour(getNewDate(hr), nextTime) &&
+                selectedHr == hr &&
+                " bg-red-500 text-white",
+            )}
+          >
+            {hr}
+          </button>
+        );
+      })}
+      <button
+        onClick={toggleMeridiem}
+        className="rounded-full bg-blue-600 p-2 text-base text-white outline-none hover:outline"
+      >
+        {meridiem ? "AM" : "PM"}
+      </button>
+    </div>
+  );
 
   // return (
   //   <div class="relative flex aspect-square w-80 items-center justify-center ">
@@ -142,7 +194,7 @@ export default () => {
   //     >
   //       12
   //     </button>
-  //     <h3 className="text-lg font-semibold text-sky-600">{meridiem}</h3>
+  //     <button className="text-lg font-semibold text-sky-600">{meridiem}</button>
   //   </div>
   // );
 };

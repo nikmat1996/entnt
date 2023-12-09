@@ -5,6 +5,7 @@ import ClientList from "./components/ClientList";
 import InputUser from "./components/InputUser";
 import Modal from "./components/Modal";
 import userStore from "./store/userStore";
+import meetingStore from "./store/meetingStore";
 
 //     {
 //         id: 1,
@@ -40,10 +41,14 @@ export default function Home() {
   const addUser_state = userStore((store) => store.addUser_state);
   const editUser_state = userStore((store) => store.editUser_state);
   const deleteUser_state = userStore((store) => store.deleteUser_state);
+  const addmeeting_state = meetingStore((store) => store.addmeeting_state);
   const change_addUser_state = userStore((store) => store.change_addUser_state);
   const change_editUser_state = userStore(
     (store) => store.change_editUser_state,
   );
+  const editmeeting_state = meetingStore((store) => store.editmeeting_state);
+  const deletemeeting_state = meetingStore((store) => store.deletemeeting_state);
+
   const change_deleteUser_state = userStore(
     (store) => store.change_deleteUser_state,
   );
@@ -58,17 +63,18 @@ export default function Home() {
   };
 
   return (
-    <main onClick={handleWholeClick} className="max-h-screen p-24 relative">
+    <main onClick={handleWholeClick} className="relative max-h-screen p-24">
       <ClientList />
 
       <AddUserButton
         editUser_state={editUser_state}
         deleteUser_state={deleteUser_state}
+        deletemeeting_state={deletemeeting_state}
         addUser_state={addUser_state}
         change_addUser_state={change_addUser_state}
         addUser={addUser}
       />
-      <Modal />
+      {(addmeeting_state || editmeeting_state) && <Modal />}
     </main>
   );
 }

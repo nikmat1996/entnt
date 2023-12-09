@@ -18,16 +18,15 @@ export default () => {
     const add_deleteUser_id = userStore((store) => store.add_deleteUser_id);
     const change_editUser_state = userStore((store) => store.change_editUser_state);
     const change_deleteUser_state = userStore((store) => store.change_deleteUser_state);
-
+    
     const meetings = meetingStore((store) => store.meetings);
     const deleteAllmeetingOfPerson = meetingStore((store) => store.deleteAllmeetingOfPerson);
     const addmeeting_state = meetingStore((store) => store.addmeeting_state);
+    const deletemeeting_id = meetingStore((store) => store.deletemeeting_id);
+    const deletemeeting_state = meetingStore((store) => store.deletemeeting_state);
 
-
-
-    console.log("editUser_id = ", editUser_id);
-    console.log("addUser_state = ", addUser_state);
-
+    console.log(deletemeeting_id)
+    
     return (
         <ul role="list" className={`${addUser_state || addmeeting_state ? "pointer-events-none opacity-30" : ""} flex flex-col gap-4 mb-4 w-full max-w-7xl mx-auto`}>
             {users.map((person) => {
@@ -42,14 +41,17 @@ export default () => {
                             />
                         );
                 }
-                if (deleteUser_state) {
-                    if (person.id === deleteUser_id)
+                if (deleteUser_state || deletemeeting_state) {
+                    if (person.id === deleteUser_id || person.id === deletemeeting_id.userId)
                         return (
                             <DeleteUser 
                                 person={person} 
                                 deleteUser={deleteUser} 
                                 change_deleteUser_state={change_deleteUser_state}
                                 deleteAllmeetingOfPerson={deleteAllmeetingOfPerson}
+                                deleteUser_state={deleteUser_state}
+                                meetings={meetings}
+                                
                             />
                         );
                 }
@@ -65,6 +67,7 @@ export default () => {
                         change_deleteUser_state={change_deleteUser_state}
                         add_deleteUser_id={add_deleteUser_id}
                         meetings={meetings}
+                        deletemeeting_state={deletemeeting_state}
                     />
                 );
             })}

@@ -16,7 +16,8 @@ export default (props) => {
         change_editUser_state, 
         change_deleteUser_state, 
         add_deleteUser_id,
-        meetings
+        meetings,
+        deletemeeting_state
      } = props;
     // const deleteUser = userStore((state) => state.deleteUser);
     // const change_editUser_state = userStore((state) => state.change_editUser_state);
@@ -32,7 +33,7 @@ export default (props) => {
     }
 
     return (
-        <li className={`${editUser_state || deleteUser_state ? "pointer-events-none opacity-30" : ""} flex relative justify-between gap-x-6 px-5 py-2 bg-slate-800 rounded-2xl group/li hover:bg-blue-950 transition-all hover:shadow-lg selection:text-sky-900 selection:bg-blue-400`}>
+        <li className={`${editUser_state || deleteUser_state || deletemeeting_state? "pointer-events-none opacity-30" : ""} flex relative justify-between gap-x-6 px-5 py-2 bg-slate-800 rounded-2xl group/li hover:bg-blue-950 transition-all hover:shadow-lg selection:text-sky-900 selection:bg-blue-400`}>
             <section className="flex min-w-0 py-4 gap-x-4 group/s1 border-r border-blue-900 w-full max-w-sm items-center">
                 <span
                     onClick={handleDeleteUser}

@@ -62,18 +62,25 @@ const meetings = [
 ];
 
 
-export default function Calender() {
+export default function Calender({ setDay = () => {}, setFinalSchedule}) {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [selectedMonth, setSelectedMonth] = useState(format(today, "MMM-yyyy"));
   let firstDaySelectedMonth = parse(selectedMonth, "MMM-yyyy", new Date());
   let currentMonth = format(today, "MMM-yyyy");
   
+  // console.log(parse("23-MAY-2023", "dd-MMM-yyyy", new Date()))
   console.log("selected = ", selectedDay)
   let days = eachDayOfInterval({
     start: firstDaySelectedMonth,
     end: endOfMonth(firstDaySelectedMonth),
   });
+
+  function handleClick(day){
+    setSelectedDay(day)
+    setFinalSchedule(false)
+    setDay(day)
+  }
 
   function previousMonth() {
     let firstDayNextMonth = add(firstDaySelectedMonth, { months: -1 });
@@ -138,7 +145,7 @@ export default function Calender() {
                 >
                   <button
                     type="button"
-                    onClick={() => setSelectedDay(day)}
+                    onClick={() => handleClick(day)}
                     className={twMerge(
                       isEqual(day, selectedDay) && "text-white",
                       !isEqual(day, selectedDay) && isToday(day) && "text-red-500",
