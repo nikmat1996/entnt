@@ -21,7 +21,7 @@ import {
   isSameHour,
 } from "date-fns";
 
-export default ({ day = Date.now(), setFinalSchedule = () => {} }) => {
+const Time = ({ day = Date.now(), setFinalSchedule = () => {} }) => {
   const currTime = new Date();
   const nextTime = addHours(currTime, 1);
   const nextHr = format(nextTime, "h");
@@ -198,3 +198,6 @@ export default ({ day = Date.now(), setFinalSchedule = () => {} }) => {
   //   </div>
   // );
 };
+
+
+export default Time

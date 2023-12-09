@@ -2,7 +2,7 @@ import Button from "./Button";
 import { fromUnixTime, format } from "date-fns";
 import meetingStore from "../store/meetingStore";
 
-export default ({person, deleteUser, change_deleteUser_state, deleteAllmeetingOfPerson, deleteUser_state, meetings}) => {
+const DeleteUser = ({person, deleteUser, change_deleteUser_state, deleteAllmeetingOfPerson, deleteUser_state, meetings}) => {
 
   const deletemeeting_id = meetingStore((store) => store.deletemeeting_id);
   const deletemeeting = meetingStore((store) => store.deletemeeting);
@@ -42,3 +42,5 @@ export default ({person, deleteUser, change_deleteUser_state, deleteAllmeetingOf
     </section>
   );
 };
+
+export default DeleteUser

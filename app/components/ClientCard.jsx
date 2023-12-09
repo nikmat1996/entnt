@@ -6,7 +6,7 @@ import meetingStore from "../store/meetingStore";
 import EditIcon from "./EditIcon";
 import MeetingList from "./MeetingList";
 
-export default (props) => {
+const ClientCard = (props) => {
 
     const { 
         person, 
@@ -68,3 +68,5 @@ export default (props) => {
         </li>
     );
 };
+
+export default ClientCard

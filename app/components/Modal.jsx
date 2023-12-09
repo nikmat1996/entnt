@@ -27,7 +27,7 @@ import {
 } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
 
-export default () => {
+const Modal =() => {
   const addmeeting = meetingStore((store) => store.addmeeting);
   const updatemeeting = meetingStore((store) => store.updatemeeting);
   const change_addmeeting_state = meetingStore(
@@ -95,3 +95,5 @@ export default () => {
     </section>
   );
 };
+
+export default Modal

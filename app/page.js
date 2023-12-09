@@ -69,6 +69,7 @@ export default function Home() {
       <AddUserButton
         editUser_state={editUser_state}
         deleteUser_state={deleteUser_state}
+        editmeeting_state={editmeeting_state}
         deletemeeting_state={deletemeeting_state}
         addUser_state={addUser_state}
         change_addUser_state={change_addUser_state}

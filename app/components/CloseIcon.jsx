@@ -1,4 +1,4 @@
-export default (className) => (
+const CloseIcon = (className) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -14,3 +14,5 @@ export default (className) => (
         />
     </svg>
 );
+
+export default CloseIcon

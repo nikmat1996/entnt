@@ -5,7 +5,7 @@ import InputUser from "./InputUser";
 import meetingStore from "../store/meetingStore";   
 
 
-export default () => {
+const ClientList = () => {
     const users = userStore((store) => store.users);
     const editUser_state = userStore((store) => store.editUser_state);
     const addUser_state = userStore((store) => store.addUser_state);
@@ -22,18 +22,20 @@ export default () => {
     const meetings = meetingStore((store) => store.meetings);
     const deleteAllmeetingOfPerson = meetingStore((store) => store.deleteAllmeetingOfPerson);
     const addmeeting_state = meetingStore((store) => store.addmeeting_state);
+    const editmeeting_state = meetingStore((store) => store.editmeeting_state);
     const deletemeeting_id = meetingStore((store) => store.deletemeeting_id);
     const deletemeeting_state = meetingStore((store) => store.deletemeeting_state);
 
     console.log(deletemeeting_id)
     
     return (
-        <ul role="list" className={`${addUser_state || addmeeting_state ? "pointer-events-none opacity-30" : ""} flex flex-col gap-4 mb-4 w-full max-w-7xl mx-auto`}>
+        <ul role="list" className={`${addUser_state || addmeeting_state ||  editmeeting_state? "pointer-events-none opacity-30" : ""} flex flex-col gap-4 mb-4 w-full max-w-7xl mx-auto`}>
             {users.map((person) => {
                 if (editUser_state) {
                     if (person.id === editUser_id)
                         return (
                             <InputUser
+                                key={person.id}
                                 person={person}
                                 editUser_state={editUser_state}
                                 updateUser={updateUser}
@@ -45,6 +47,7 @@ export default () => {
                     if (person.id === deleteUser_id || person.id === deletemeeting_id.userId)
                         return (
                             <DeleteUser 
+                                key={person.id}
                                 person={person} 
                                 deleteUser={deleteUser} 
                                 change_deleteUser_state={change_deleteUser_state}
@@ -74,3 +77,5 @@ export default () => {
         </ul>
     );
 };
+
+export default ClientList

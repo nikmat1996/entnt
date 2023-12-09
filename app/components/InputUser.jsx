@@ -2,7 +2,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import Button from "./Button";
 
-export default (props) => {
+const InputUser = (props) => {
     const { 
         addUser, 
         change_addUser_state, 
@@ -99,3 +99,5 @@ const InputWrapper = ({ id, title, placeholder, value, onChange }) => (
 );
 
 export { InputWrapper };
+
+export default InputUser

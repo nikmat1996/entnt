@@ -1,4 +1,4 @@
-export default (className) => (
+const EditIcon = (className) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
@@ -30,3 +30,5 @@ export default (className) => (
         </g>
     </svg>
 );
+
+export default EditIcon

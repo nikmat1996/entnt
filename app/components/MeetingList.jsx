@@ -4,7 +4,7 @@ import { fromUnixTime, format } from "date-fns";
 import CloseIcon from "./CloseIcon";
 import EditIcon from "./EditIcon";
 
-export default ({ userId, meetings }) => {
+const MeetingList = ({ userId, meetings }) => {
   const change_addmeeting_state = meetingStore(
     (store) => store.change_addmeeting_state,
   );
@@ -84,3 +84,5 @@ export default ({ userId, meetings }) => {
     </section>
   );
 };
+
+export default MeetingList
