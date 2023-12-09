@@ -1,6 +1,8 @@
 "use client"
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   add,
   eachDayOfInterval,
@@ -79,7 +81,7 @@ const Time = ({ day = Date.now(), setFinalSchedule = () => {} }) => {
       {Array.from({ length: 12 }, (_, index) => index + 1).map((hr) => {
         return (
           <button
-            key={index}
+            key={uuidv4()}
             onClick={() => handleClick(hr)}
             className={twMerge(
               "absolute aspect-square h-9 rounded-full text-sky-600 hover:outline",
