@@ -13,12 +13,17 @@ export default () => {
   const users = userStore((store) => store.users);
   if (!addmeeting_state) return null;
   return (
-    <section className="absolute left-1/2 top-1/2 min-h-[500px] -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-slate-800 p-5 text-center">
-      <div className="flex ">
+    <section className="absolute left-1/2 top-1/2 min-h-[545px] -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-slate-800 p-10 pt-12 flex flex-col justify-between">
+      <div className="flex grow">
         <Calender />
         <Time />
       </div>
-      <Button onClick={() => change_addmeeting_state(false)}>Cancel</Button>
+      <div className="flex gap-2 justify-center">
+        <label htmlFor="schedule-button"></label>
+        <Button id="schedule-button">Done</Button>
+        <Button onClick={() => change_addmeeting_state(false)}>Cancel</Button>
+
+      </div>
     </section>
   );
 };

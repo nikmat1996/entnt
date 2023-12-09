@@ -15,6 +15,7 @@ import {
 } from "date-fns";
 import { Fragment, useState } from "react";
 import LeftIcon from "./Icons/LeftIcon";
+import { twMerge } from "tailwind-merge";
 import RightIcon from "./Icons/RightIcon";
 
 const meetings = [
@@ -60,9 +61,6 @@ const meetings = [
   },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Calender() {
   let today = startOfToday();
@@ -91,9 +89,8 @@ export default function Calender() {
   );
 
   return (
-      <div className="mx-auto w-80 md:w-96 md:px-6 transition-all">
+      <div className="mx-auto w-80 md:w-96 md:px-6 transition-all ">
         {/* <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200"> */}
-          <div className="">
             <div className="flex items-center">
               <h2 className="flex-auto font-semibold text-blue-600">
                 {format(firstDayCurrentMonth, "MMMM yyyy")}
@@ -119,7 +116,7 @@ export default function Calender() {
                 </span>
               </button>
             </div>
-            <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-sky-400 select-none" >
+            <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-sky-400 select-none pb-3" >
               <div>S</div>
               <div>M</div>
               <div>T</div>
@@ -128,11 +125,11 @@ export default function Calender() {
               <div>F</div>
               <div>S</div>
             </div>
-            <div className="mt-2 grid grid-cols-7 text-sm">
+            <div className="mt-2 grid grid-cols-7 text-sm ">
               {days.map((day, dayIdx) => (
                 <div
                   key={day.toString()}
-                  className={classNames(
+                  className={twMerge(
                     dayIdx === 0 && colStartClasses[getDay(day)],
                     "py-1.5",
                   )}
@@ -140,7 +137,7 @@ export default function Calender() {
                   <button
                     type="button"
                     onClick={() => setSelectedDay(day)}
-                    className={classNames(
+                    className={twMerge(
                       isEqual(day, selectedDay) && "text-white",
                       !isEqual(day, selectedDay) && isToday(day) && "text-red-500",
                       !isEqual(day, selectedDay) && !isToday(day) && isSameMonth(day, firstDayCurrentMonth) && "text-sky-600",
@@ -149,7 +146,7 @@ export default function Calender() {
                       isEqual(day, selectedDay) && !isToday(day) && "bg-blue-600",
                       !isEqual(day, selectedDay) && "hover:outline",
                       (isEqual(day, selectedDay) || isToday(day)) && "font-semibold",
-                      (compareAsc(day, today) === -1) && "text-gray-600 pointer-events-none",
+                      (compareAsc(day, today) === -1) && "text-sky-800 pointer-events-none",
                       "mx-auto flex h-8 w-8 items-center justify-center rounded-full",
                     )}
                   >
@@ -168,10 +165,9 @@ export default function Calender() {
                 </div>
               ))}
             </div>
-          </div>
           {/* <section className="mt-12 md:mt-0 md:pl-14">
             <h2 className="font-semibold text-gray-900">
-              Schedule for{" "}
+              Schedule for{" "} 
               <time dateTime={format(selectedDay, "yyyy-MM-dd")}>
                 {format(selectedDay, "MMM dd, yyy")}
               </time>
