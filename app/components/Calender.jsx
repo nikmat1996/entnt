@@ -65,23 +65,24 @@ const meetings = [
 export default function Calender() {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
-  let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
-  let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
+  let [selectedMonth, setSelectedMonth] = useState(format(today, "MMM-yyyy"));
+  let firstDaySelectedMonth = parse(selectedMonth, "MMM-yyyy", new Date());
+  let currentMonth = format(today, "MMM-yyyy");
   
   console.log("selected = ", selectedDay)
   let days = eachDayOfInterval({
-    start: firstDayCurrentMonth,
-    end: endOfMonth(firstDayCurrentMonth),
+    start: firstDaySelectedMonth,
+    end: endOfMonth(firstDaySelectedMonth),
   });
 
   function previousMonth() {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
-    setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
+    let firstDayNextMonth = add(firstDaySelectedMonth, { months: -1 });
+    setSelectedMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
   function nextMonth() {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
-    setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
+    let firstDayNextMonth = add(firstDaySelectedMonth, { months: 1 });
+    setSelectedMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
   let selectedDayMeetings = meetings.filter((meeting) =>
@@ -93,25 +94,26 @@ export default function Calender() {
         {/* <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200"> */}
             <div className="flex items-center">
               <h2 className="flex-auto font-semibold text-blue-600">
-                {format(firstDayCurrentMonth, "MMMM yyyy")}
+                {format(firstDaySelectedMonth, "MMMM yyyy")}
               </h2>
               <button
                 type="button"
                 onClick={previousMonth}
-                className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="-my-1.5 flex flex-none items-center justify-center p-1.5 disabled:pointer-events-none group"
+                disabled={currentMonth == selectedMonth}
               >
                 <span className="sr-only">Previous month</span>
-                <span className="h-6 w-6 hover:bg-blue-950 rounded-full flex justify-center items-center" aria-hidden="true">
+                <span className="h-6 w-6 hover:outline hover:outline-1 hover:outline-sky-400 rounded-full flex justify-center items-center group-disabled:opacity-30" aria-hidden="true">
                   <LeftIcon />
                 </span>
               </button>
               <button
                 onClick={nextMonth}
                 type="button"
-                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 "
               >
                 <span className="sr-only">Next month</span>
-                <span className="h-6 w-6 hover:bg-blue-950 rounded-full flex justify-center items-center" aria-hidden="true">
+                <span className="h-6 w-6 hover:outline hover:outline-1 hover:outline-sky-400 rounded-full flex justify-center items-center" aria-hidden="true">
                   <RightIcon />
                 </span>
               </button>
@@ -140,8 +142,8 @@ export default function Calender() {
                     className={twMerge(
                       isEqual(day, selectedDay) && "text-white",
                       !isEqual(day, selectedDay) && isToday(day) && "text-red-500",
-                      !isEqual(day, selectedDay) && !isToday(day) && isSameMonth(day, firstDayCurrentMonth) && "text-sky-600",
-                      !isEqual(day, selectedDay) && !isToday(day) && !isSameMonth(day, firstDayCurrentMonth) && "text-blue-400",
+                      !isEqual(day, selectedDay) && !isToday(day) && isSameMonth(day, firstDaySelectedMonth) && "text-sky-600",
+                      !isEqual(day, selectedDay) && !isToday(day) && !isSameMonth(day, firstDaySelectedMonth) && "text-blue-400",
                       isEqual(day, selectedDay) && isToday(day) && "bg-red-500", 
                       isEqual(day, selectedDay) && !isToday(day) && "bg-blue-600",
                       !isEqual(day, selectedDay) && "hover:outline",
