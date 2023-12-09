@@ -78,6 +78,7 @@ const Time = ({ day = Date.now(), setFinalSchedule = () => {} }) => {
       {Array.from({ length: 12 }, (_, index) => index + 1).map((hr) => {
         return (
           <button
+            key={index}
             onClick={() => handleClick(hr)}
             className={twMerge(
               "absolute aspect-square h-9 rounded-full text-sky-600 hover:outline",
