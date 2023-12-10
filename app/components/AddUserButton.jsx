@@ -1,6 +1,6 @@
 import InputUser from "./InputUser";
 import meetingStore from "../store/meetingStore";   
-import PlusIcon from "./PlusIcon";
+import PlusIcon from "./Icons/PlusIcon";
 
  const AddUserButton = (props) => {
   const {

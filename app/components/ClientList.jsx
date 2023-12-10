@@ -44,7 +44,7 @@ const ClientList = () => {
                         );
                 }
                 if (deleteUser_state || deletemeeting_state) {
-                    if (person.id === deleteUser_id || person.id === deletemeeting_id.userId)
+                    if (person.id === deleteUser_id || person.id === deletemeeting_id?.userId)
                         return (
                             <DeleteUser 
                                 key={person.id}

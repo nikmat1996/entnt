@@ -1,9 +1,9 @@
-import CloseIcon from "./CloseIcon";
+import CloseIcon from "./Icons/CloseIcon";
 import Image from "next/image";
-import LocationIcon from "./LocationIcon";
+import LocationIcon from "./Icons/LocationIcon";
 import userStore from "../store/userStore";
 import meetingStore from "../store/meetingStore";
-import EditIcon from "./EditIcon";
+import EditIcon from "./Icons/EditIcon";
 import MeetingList from "./MeetingList";
 
 const ClientCard = (props) => {

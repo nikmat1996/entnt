@@ -27,11 +27,11 @@ const meetingStore = create((set) => ({
     set((store) => ({ meetings: [...store.meetings, newVal] })),
   deletemeeting: (id) =>
     set((store) => ({
-      meetings: store.meetings.filter((meeting) => meeting.id !== id),
+      meetings: store.meetings.filter((meeting) => meeting.id != id),
     })),
   deleteAllmeetingOfPerson: (id) =>
     set((store) => ({
-      meetings: store.meetings.filter((meeting) => meeting.userId !== id),
+      meetings: store.meetings.filter((meeting) => meeting.userId != id),
     })),
   updatemeeting: (updatedVal) =>
     set((store) => ({

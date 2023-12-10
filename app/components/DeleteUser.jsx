@@ -11,7 +11,7 @@ const DeleteUser = ({person, deleteUser, change_deleteUser_state, deleteAllmeeti
     (store) => store.change_deletemeeting_state,
   );
 
-  const meeting = meetings?.find(meeting => meeting.id == deletemeeting_id.id)
+  const meeting = meetings?.find(meeting => meeting.id == deletemeeting_id?.id)
   console.log(person)
 
     const handleDelete = () => {

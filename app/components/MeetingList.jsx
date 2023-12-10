@@ -1,8 +1,8 @@
-import PlusIcon from "./PlusIcon";
+import PlusIcon from "./Icons/PlusIcon";
 import meetingStore from "../store/meetingStore";
 import { fromUnixTime, format } from "date-fns";
-import CloseIcon from "./CloseIcon";
-import EditIcon from "./EditIcon";
+import CloseIcon from "./Icons/CloseIcon";
+import EditIcon from "./Icons/EditIcon";
 
 const MeetingList = ({ userId, meetings }) => {
   const change_addmeeting_state = meetingStore(
