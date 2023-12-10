@@ -63,7 +63,7 @@ export default function Home() {
   };
 
   return (
-    <main onClick={handleWholeClick} className="relative max-h-screen p-24">
+    <main onClick={handleWholeClick} className="relative  p-5 md:p-24">
       <ClientList />
 
       <AddUserButton

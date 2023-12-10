@@ -35,10 +35,12 @@ const DeleteUser = ({person, deleteUser, change_deleteUser_state, deleteAllmeeti
     }
 
   return (
-    <section className="flex h-[104px] items-center justify-center gap-5 rounded-3xl border border-blue-400 bg-gray-800 px-5 py-2">
-        <p className="text-gray-400">{deleteUser_state ? `DELETE ${person.lastName}`: `Delete Meeting with ${person.lastName} at ${format(fromUnixTime(meeting?.timeStamp),"h a")}`}</p>
-        <Button onClick={handleDelete}>Confirm</Button>
-        <Button onClick={handleCancel}>Cancel</Button>
+    <section className="flex h-[104px] flex-col md:flex-row items-center justify-center gap-5 rounded-3xl border border-blue-400 bg-gray-800 px-5 py-2">
+        <p className="text-gray-400">{deleteUser_state ? `DELETE ${person.lastName}`: `Delete Meeting with ${person.lastName} at ${format(fromUnixTime(meeting?.timeStamp),"h a")}?`}</p>
+        <div className="flex gap-x-5">
+          <Button onClick={handleDelete}>Confirm</Button>
+          <Button onClick={handleCancel}>Cancel</Button>
+        </div>
     </section>
   );
 };

@@ -33,8 +33,8 @@ const ClientCard = (props) => {
     }
 
     return (
-        <li className={`${editUser_state || deleteUser_state || deletemeeting_state? "pointer-events-none opacity-30" : ""} flex relative justify-between gap-x-6 px-5 py-2 bg-slate-800 rounded-2xl group/li hover:bg-blue-950 transition-all hover:shadow-lg selection:text-sky-900 selection:bg-blue-400`}>
-            <section className="flex min-w-0 py-4 gap-x-4 group/s1 border-r border-blue-900 w-full max-w-sm items-center">
+        <li className={`${editUser_state || deleteUser_state || deletemeeting_state? "pointer-events-none opacity-30" : ""} flex flex-col lg:flex-row gap-y-4 relative justify-between gap-x-6 px-5 py-2 bg-slate-800 rounded-2xl group/li hover:bg-blue-950 transition-all hover:shadow-lg selection:text-sky-900 selection:bg-blue-400`}>
+            <section className="flex min-w-0 py-4 md:gap-x-4 group/s1 lg:border-r border-blue-900 w-full max-w-sm items-center">
                 <span
                     onClick={handleDeleteUser}
                     className="absolute peer top-0 right-0 invisible cursor-pointer opacity-0 rounded-full bg-blue-800 transition-all hover:bg-blue-500 group-hover/li:opacity-100 group-hover/li:visible group-hover/li:translate-x-2 group-hover/li:-translate-y-3"
@@ -42,7 +42,7 @@ const ClientCard = (props) => {
                     <CloseIcon />
                 </span>
                 <Image
-                    className="h-14 w-14 mr-3 flex-none rounded-full bg-gray-50 opacity-90 group-hover/li:opacity-100 peer-hover:opacity-10"
+                    className="h-12 w-12 md:w-14 md:h-14 mr-3 flex-none rounded-full bg-gray-50 opacity-90 group-hover/li:opacity-100 peer-hover:opacity-10"
                     src={person.imageUrl}
                     width={6}
                     height={6}
@@ -58,7 +58,7 @@ const ClientCard = (props) => {
                         {person.location}
                     </p>
                 </div>
-                <button  onClick={handleEditUser} className="flex items-center invisible peer-hover:invisible group-hover/s1:visible rounded-3xl border group/edit border-gray-500 cursor-pointer  h-6 p-2 mr-5 opacity-75 hover:opacity-100 hover:bg-slate-800">
+                <button  onClick={handleEditUser} className="flex items-center invisible peer-hover:invisible group-hover/s1:visible rounded-3xl border group/edit border-gray-500 cursor-pointer  h-6 p-2 md:mr-5 opacity-75 hover:opacity-100 hover:bg-slate-800">
                     <div className="text-xs p-2 text-gray-400">Edit User</div>
                     <span className="-translate-x-1 group-hover/edit:translate-x-0 transition-transform duration-300"><EditIcon /></span>
                 </button>

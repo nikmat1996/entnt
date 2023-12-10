@@ -43,14 +43,14 @@ const MeetingList = ({ userId, meetings }) => {
   }
 
   return (
-    <section className="flex gap-5">
-      <div className="flex gap-5">
+    <section className="flex gap-5 min-h-[114px] ">
+      <div className="flex gap-5 w-[374px] p-2 overflow-x-auto custom-scrollbar justify-end lg:border-r border-blue-900">
         {meetings
           .filter((meeting) => meeting.userId == userId)
           .map((meeting) => (
             <div
               key={meeting.id}
-              className="relative flex flex-col justify-center rounded-3xl group/meeting px-6 text-center text-sm/6 text-sky-500 outline outline-1 outline-gray-600"
+              className="relative min-w-[111px] flex flex-col justify-center rounded-3xl group/meeting px-6 text-center text-sm/6 text-sky-500 outline outline-1 outline-gray-600"
             >
               <span
                   onClick={() => handleDelete(meeting.id)}
@@ -64,7 +64,7 @@ const MeetingList = ({ userId, meetings }) => {
               >
                   <EditIcon />
               </span>
-              <h4 className="text-xs font-semibold peer-hover/meeting:line-through peer-hover/meeting:opacity-50">{`${format(fromUnixTime(meeting.timeStamp),"E")}`}</h4>
+              <h4 className="hidden sm:block text-xs font-semibold peer-hover/meeting:line-through peer-hover/meeting:opacity-50">{`${format(fromUnixTime(meeting.timeStamp),"E")}`}</h4>
               <h3 className="font-bold peer-hover/meeting:line-through peer-hover/meeting:opacity-50">{`${format(fromUnixTime(meeting.timeStamp),"do")} `}
                 <span className="uppercase peer-hover/meeting:line-through peer-hover/meeting:opacity-50">{`${format(fromUnixTime(meeting.timeStamp),"MMM")}`}</span>
               </h3>

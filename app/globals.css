@@ -12,3 +12,28 @@
   }
 }
 
+/* CUSTOM SCROLL BAR */
+
+/* width */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #3939392c;
+  border-radius: 5px;
+}
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #3a3a3a;
+}
+
+/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #888787;
+}
+

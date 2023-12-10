@@ -53,7 +53,7 @@ const InputUser = (props) => {
     }
 
     return (
-        <form className="px-5 py-2 flex items-center justify-around bg-gray-800 rounded-3xl h-[104px] border border-blue-400 w-full max-w-7xl mx-auto"  onClick={handleFormClick} onSubmit={handleSubmit}>
+        <form className="px-5 py-10 lg:py-2 flex flex-col xl:flex-row items-center justify-around bg-gray-800 rounded-3xl min-h-[104px] gap-y-10  border border-blue-400 w-full max-w-7xl mx-auto"  onClick={handleFormClick} onSubmit={handleSubmit}>
             <InputWrapper
                 id={"firstName"}
                 title={"First Name"}
@@ -75,8 +75,10 @@ const InputUser = (props) => {
                 placeholder={"Location"}
                 onChange={handleChange}
             />
-            <Button type="submit" >{editUser_state ? "Update" : "Add"}</Button>
-            <Button onClick={handleCancel}>Cancel</Button>
+            <div className="flex  gap-x-5 ">
+                <Button type="submit" >{editUser_state ? "Update" : "Add"}</Button>
+                <Button onClick={handleCancel}>Cancel</Button>
+            </div>
         </form>
     );
 };

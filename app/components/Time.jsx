@@ -77,7 +77,7 @@ const Time = ({ day = Date.now(), setFinalSchedule = () => {} }) => {
     setFinalSchedule(false)
   };
   return (
-    <div className="relative flex aspect-square h-96 items-center justify-center ">
+    <div className="relative flex aspect-square h-72 md:h-96 items-center justify-center ">
       {Array.from({ length: 12 }, (_, index) => index + 1).map((hr) => {
         return (
           <button
